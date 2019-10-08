@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.servlet.MockMvc;
@@ -126,5 +127,17 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
 
+    }
+
+    @Test
+    public void whenUploadSuccess() throws Exception {
+
+      String result = mockMvc
+                              .perform(MockMvcRequestBuilders.multipart("/file")
+                                      .file(new MockMultipartFile("file","test.txt","multipart/form-data","hello".getBytes("UTF-8"))))
+                                .andExpect(MockMvcResultMatchers.status().isOk())
+                                .andReturn().getResponse().getContentAsString();
+
+        System.out.println(result);
     }
 }
