@@ -1,6 +1,7 @@
 package com.yaolong.security.browser;
 
 import com.yaolong.security.browser.encoder.MyPasswordEncoder;
+import com.yaolong.security.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyUserDetailsService userDetailsService;
 
+    @Autowired
+    private SecurityProperties securityProperties = new SecurityProperties();
 //    @Autowired
 //    private MyPasswordEncoder myPasswordEncoder;
     @Autowired
@@ -30,21 +33,22 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 //让认证提供者生效
                 .authenticationProvider(authenticationProvider())
-                .inMemoryAuthentication().passwordEncoder(passwordEncoder)
-                .withUser("admin")
-                .password("asc")
-                .roles("admin");
+                .inMemoryAuthentication().passwordEncoder(passwordEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
+                .loginPage("/authentication/require")
+                .loginProcessingUrl("/authentication/form")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/user/**").hasRole("admin")
+                .antMatchers("/authentication/require",securityProperties.getBrowserProperties().getLoginPage() ).permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .csrf().disable();
     }
 
     /**

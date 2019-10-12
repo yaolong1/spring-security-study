@@ -4,6 +4,7 @@ package com.yaolong.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Component;
  * 定义切面拦截
  */
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class TimeAspect {
 
     @Around("execution(* com.yaolong.web.controller.TestController.*(..))")
@@ -21,7 +22,6 @@ public class TimeAspect {
         System.out.println("time aspect start");
 
         long start = System.currentTimeMillis();
-
         Object[] args = pjp.getArgs();
 
         for (Object arg : args) {

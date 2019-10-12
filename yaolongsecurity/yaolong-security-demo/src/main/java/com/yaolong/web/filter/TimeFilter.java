@@ -25,6 +25,7 @@ public class TimeFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.out.println("Time filter start");
         long start = System.currentTimeMillis();
+
         chain.doFilter(request, response);
         System.out.println("Time filter 耗时 :" + (System.currentTimeMillis() - start));
         System.out.println("Time filter finish");

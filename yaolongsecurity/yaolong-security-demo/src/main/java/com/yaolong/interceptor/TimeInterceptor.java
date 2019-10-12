@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2019/10/6  16:08
  * 定义拦截器
  */
-@Component
+//@Component
 public class TimeInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

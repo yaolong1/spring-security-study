@@ -15,3 +15,8 @@ spring:
       password: 123
     basic:
       enabled: false
+
+yaolong:
+  security:
+    browser:
+      loginPage: /demo-signIn.html

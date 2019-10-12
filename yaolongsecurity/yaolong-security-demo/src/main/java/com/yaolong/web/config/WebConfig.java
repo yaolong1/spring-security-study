@@ -18,30 +18,30 @@ import java.util.List;
 //@Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    @Autowired
-    TimeInterceptor timeInterceptor;
+//    @Autowired
+//    TimeInterceptor timeInterceptor;
 
     /**
      * 注册过滤器
      *
      * @return
      */
-    @Bean
-    public FilterRegistrationBean timeFilter() {
-
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        TimeFilter timeFilter = new TimeFilter();
-
-        //注册TimeFilter过滤器
-        registrationBean.setFilter(timeFilter);
-
-        //设置过滤器的生效的路径
-        List<String> urls = new ArrayList<>();
-        urls.add("/*");
-        registrationBean.setUrlPatterns(urls);
-
-        return registrationBean;
-    }
+//    @Bean
+//    public FilterRegistrationBean timeFilter() {
+//
+//        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+//        TimeFilter timeFilter = new TimeFilter();
+//
+//        //注册TimeFilter过滤器
+//        registrationBean.setFilter(timeFilter);
+//
+//        //设置过滤器的生效的路径
+//        List<String> urls = new ArrayList<>();
+//        urls.add("/*");
+//        registrationBean.setUrlPatterns(urls);
+//
+//        return registrationBean;
+//    }
 
 
     /**
@@ -49,18 +49,16 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      *
      * @param registry
      */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(timeInterceptor).addPathPatterns("/**").excludePathPatterns("/swagger-resources/**", "/swagger-ui.html/**");
-
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(timeInterceptor).addPathPatterns("/**").excludePathPatterns("/swagger-resources/**", "/swagger-ui.html/**");
+//
+//    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
 
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }
